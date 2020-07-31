@@ -5,7 +5,18 @@
    Cityorders will be constrained to match the Customers and Orders tables. Assume
    the parent keys in these tables already have the proper constraints.
 -->
-   
+   CREATE TABLE cityorders
+   SELECT onum,
+       amt,
+       snum,
+       cnum,
+       city
+   FROM orders
+   NATURAL JOIN customers;
+
+  ALTER TABLE cityorders ADD CONSTRAINT onum_fk
+  FOREIGN key(onum) REFERENCES orders(onum);
+  DESC cityorders;
 
 ===================================================================================
 
@@ -16,5 +27,7 @@ key should refer as well to the cnum of the customer, providing a definite
 enforced link between the current order and the one referenced.  
 -->
 
-ALTER TABLE orders ADD
-FOREIGN key(prev) REFERENCES orders(onum);
+   alter table orders add prev varchar(10);
+	ALTER TABLE orders add 
+   foreign key(prev) REFERENCES orders(onum);
+=================================================================================
